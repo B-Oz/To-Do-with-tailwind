@@ -18,6 +18,7 @@ const addTodo = (e) => {
 const deleteTodo = (e) => {
   if (e.target.className === "fa-sharp fa-solid fa-trash p-2") {
     e.target.parentElement.parentElement.remove();
+    deleteTodoStorage(e.target.parentElement.parentElement.textContent);
   }
 };
 
@@ -55,6 +56,27 @@ const setTodoLocalStorage = (newTodo) => {
   localStorage.setItem("todos", JSON.stringify(todo));
 };
 
+const loadAllTodos = () => {
+  let todos = getTodos();
+
+  todos.forEach((todo) => {
+    addTodoUI(todo);
+  });
+};
+
+const deleteTodoStorage = (deleteTodo) => {
+  let todos = getTodos();
+
+  todos.forEach((todo, idx) => {
+    if (todo === deleteTodo) {
+      todos.splice(idx, 1);
+    }
+  });
+
+  localStorage.setItem("todos", JSON.stringify(todos));
+};
+
+document.addEventListener("DOMContentLoaded", loadAllTodos);
 input.addEventListener("keyup", addTodo);
 button.addEventListener("click", addTodo);
 deleteButton.addEventListener("click", deleteTodo);
