@@ -11,6 +11,7 @@ const addTodo = (e) => {
   } else if (e.key === "Enter" || e.key === undefined) {
     console.log("başarılı");
     addTodoUI(newTodo);
+    setTodoLocalStorage(newTodo);
   }
 };
 
@@ -30,8 +31,28 @@ const addTodoUI = (newTodo) => {
   listItem.appendChild(document.createTextNode(newTodo));
   listItem.appendChild(pa);
   ul.appendChild(listItem);
-  input.value == "";
   input.focus();
+  input.value = " ";
+};
+
+// Local Storage--
+
+const getTodos = () => {
+  let todos;
+  if (localStorage.getItem("todos") === null) {
+    todos = [];
+  } else {
+    todos = JSON.parse(localStorage.getItem("todos"));
+  }
+  return todos;
+};
+
+const setTodoLocalStorage = (newTodo) => {
+  let todo = getTodos();
+
+  todo.push(newTodo);
+
+  localStorage.setItem("todos", JSON.stringify(todo));
 };
 
 input.addEventListener("keyup", addTodo);
