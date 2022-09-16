@@ -1,0 +1,10 @@
+body {
+  background-image: url(./img/pexels-jasmiina-vainio-8320121.jpg);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.text-2xl {
+  color: darkblue;
+}
